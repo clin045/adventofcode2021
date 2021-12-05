@@ -1,7 +1,8 @@
 using DelimitedFiles
 
 function read_input()
-    f = open("4/input.txt")
+    #f = open("4/input.txt")
+    f = open("4/test.txt")
     lines = readdlm(f)
     close(f)
     draws = map(x->parse(Int8, x),split(lines[1,1],","))
