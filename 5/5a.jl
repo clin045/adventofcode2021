@@ -10,7 +10,8 @@ function process_line(l)
 end
 
 function read_input()
-    f = open("5/input.txt")
+    #f = open("5/input.txt")
+    f = open("5/test.txt")
     rawlines = readdlm(f,'\n')
     processed = map(x -> process_line(x),rawlines)
     return processed

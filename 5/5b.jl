@@ -1,4 +1,5 @@
 using DelimitedFiles
+using LinearAlgebra
 
 function process_line(l)
     splitted = split(l," -> ")
@@ -10,7 +11,7 @@ function process_line(l)
 end
 
 function read_input()
-    f = open("5/test.txt")
+    f = open("5/input.txt")
     rawlines = readdlm(f,'\n')
     processed = map(x -> process_line(x),rawlines)
     return processed
@@ -37,6 +38,19 @@ function mark_map(l,map)
     
     # diagonals
     if src[1] != dst[1] && src[2] !=dst[2]
+        #println(src, dst)
+        dx = dst[1] - src[1]
+        dy = dst[2] - src[2]
+        n_steps = abs(dx)
+        unit_x = dx/n_steps
+        unit_y = dy/n_steps
+        for i in 0:n_steps
+            x = Integer(src[1]+1 + i*unit_x)
+            y = Integer(src[2]+1 + i*unit_y)
+            #println((x, y))
+            marked_map[x,y] = 1
+        end
+        #display(marked_map)
         return marked_map
     end
     
@@ -70,7 +84,7 @@ function main()
         #display(map)
 
     end
-    display(map)
+    #display(reverse(rotl90(map,3),dims=2))
     print(length(findall(x->x>=2,map)))
 end
 
